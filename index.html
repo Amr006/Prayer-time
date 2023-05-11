@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="app.css" rel="stylesheet">
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <style>
+    container {
+        /* padding-top: 78px; */
+        width: 1050px;
+        margin: 0 auto;
+    }
+    
+    .row {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .large-4 {
+        width: 33.33%;
+        float: left;
+        padding-right: 13px;
+        padding-left: 18px;
+    }
+    
+    .large-2 {
+        width: 16.66667%;
+    }
+    
+    select {
+        padding: 0.5rem;
+        border: 1px solid #cacaca;
+        color: #0a0a0a;
+        background-color: #fefefe;
+        width: 100%;
+    }
+    
+    .text-center {
+        text-align: center;
+    }
+    
+    .large-offset-4 {
+        margin-left: 33.33333%;
+        padding-top: 0.9375rem;
+    }
+    
+    .button {
+        min-width: 100px;
+        margin: 0;
+        background: #59BE82;
+        border: 2px solid #4fb478;
+        padding: 0.5em 1em 0.5em 1em;
+        color: #fff;
+        font-weight: 600;
+        font-size: 14px;
+        transition: all 0.5s ease;
+    }
+    
+    .circular {
+        border-radius: 3px !important;
+    }
+    
+   
+
+   #clockdiv{
+    font-family: sans-serif;
+    color: #fff;
+    display: inline-block;
+    font-weight: 100;
+    text-align: center;
+    font-size: 30px;
+}
+
+#clockdiv > div{
+    padding: 10px;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+#clockdiv div > span{
+    padding: 15px;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+.smalltext{
+    padding-top: 5px;
+    font-size: 16px;
+}
+</style>
+</head>
+<body>
+    
+
+<!-- Today Prayers Card-->
+<div class="large-12 columns">
+    <div class="row">
+
+        <div class="large-12 columns box">
+            <div class="row titleContainer">
+                <div class="large-5 medium-12 small-12 columns"><span class="prayerTimesToday">Prayer times today</span></div>
+                <div class="large-7 medium-12 small-12 columns"><span class="dateToday">26 Shawwal, 1437 Hijri</span></div>
+            </div>
+            <div class="row upcomingPrayerContainer">
+
+
+
+
+
+                <div class="large-12 columns text-center"><span class="upcomingPrayerTitle">Upcoming Prayer</span></div>
+                <div id="" class="large-12 columns text-center"><span class="upcomingPrayerName">Asr </span> - 
+                    <div id="clockdiv">
+                        <div>
+                            <span class="hours"></span>
+                            <div class="smalltext">Hours</div>
+                        </div>
+                        <div>
+                            <span class="minutes"></span>
+                            <div class="smalltext">Minutes</div>
+                        </div>
+                        <div>
+                            <span class="seconds"></span>
+                            <div class="smalltext">Seconds</div>
+                        </div>
+                    </div>
+                </div>
+                <a class="btn-refresh" href="/" style="opacity: 1; display: initial;"><i class="fa fa-refresh"></i></a>
+            </div>
+            <div class="row todayPrayersContainer">
+                <div class="large-2 medium-2 small-2 columns todayPrayer">
+                    <div class="todayPrayerNameContainer"><span class="todayPrayerName">Fajr</span></div>
+                    <div class="todayPrayerDetailContainer"><span class="todayPrayerTime">03:44 AM</span></div>
+                </div>
+                <div class="large-2 medium-2 small-2 columns todayPrayer">
+                    <div class="todayPrayerNameContainer"><span class="todayPrayerName">Sunrise  </span></div>
+                    <div class="todayPrayerDetailContainer"><span class="todayPrayerTime">05:24 AM</span></div>
+                </div>
+                <div class="large-2 medium-2 small-2 columns todayPrayer">
+                    <div class="todayPrayerNameContainer"><span class="todayPrayerName">Dhuhr</span></div>
+                    <div class="todayPrayerDetailContainer"><span class="todayPrayerTime">12:26 PM</span></div>
+                </div>
+                <div class="large-2 medium-2 small-2 columns todayPrayer">
+                    <div class="todayPrayerNameContainer"><span class="todayPrayerName">Asr</span></div>
+                    <div class="todayPrayerDetailContainer"><span class="todayPrayerTime">04:15 PM</span></div>
+                </div>
+                <div class="large-2 medium-2 small-2 columns todayPrayer">
+                    <div class="todayPrayerNameContainer"><span class="todayPrayerName">Maghrib</span></div>
+                    <div class="todayPrayerDetailContainer"><span class="todayPrayerTime">07:27 PM</span></div>
+                </div>
+                <div class="large-2 medium-2 small-2 columns todayPrayer">
+                    <div class="todayPrayerNameContainer"><span class="todayPrayerName">Isha</span></div>
+                    <div class="todayPrayerDetailContainer"><span class="todayPrayerTime">09:01 PM</span></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="settingsContainer">
+                    <div><span><small>Calculation method</small></span><span>Muslim World League</span></div>
+                    <div><span><small>Juristic method</small></span><span>Standard</span></div>
+                    <div><span><small>Daylight saving</small></span><span>Auto</span></div>
+
+                    <div>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Change Settings</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="row">
+    <div class="large-12 columns box">
+        <div class="row">
+            <div id="grey" class="large-12 column">
+               
+            </div>
+        </div>
+        <div class="row">
+            <div class="table-controller">
+                <div class="headings">
+                    <center>
+                    <h4 id="gregorianMonth">October 2016</h4>
+                    <p class="zero-margin">
+                        
+                    </p>
+                    </center>
+                </div>
+            </div>
+        </div>
+        <div id="monthly-prayer-slider" class="row scrollable">
+            <table id="monthly-prayers" class="text-center">
+                <tbody class="table">
+                    
+
+                    
+                    
+            </table>
+        </div>
+
+        <div class="row">
+            <div class="settingsContainer">
+                <div><span><small>Calculation method</small></span><span>Muslim World League</span></div>
+                <div><span><small>Juristic method</small></span><span>Standard</span></div>
+                <div><span><small>Daylight saving</small></span><span>Auto</span></div>
+
+                <div>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Change Settings</button>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+    </div>
+</div>
+
+
+
+<!-- Large modal -->
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <img  src="img/img-close.png" width="20">
+                </button>
+                <h4 class="modal-title" id="myLargeModalLabel">Change your preferences</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+
+                    
+                    <div class="large-4">
+                        <h5>
+                            Juristic settings
+                        </h5>
+                        <select id="preferenceJuristicMethod" name="preferenceJuristicMethod">
+
+							<option value="0" selected="">Standard</option>
+							<option value="1">Hanafi</option>
+			            </select>
+                    </div>
+                    <div class="large-4">
+                        <h5>
+                            Calculation method
+                        </h5>
+                        <select id="preferenceCalculationMethod" name="preferenceCalculationMethod">
+                            <option value="3" selected="">Muslim World League</option>
+							<option value="5">Egyptian General Authority of Survey</option>
+							<option value="1">University Of Islamic Sciences, Karachi</option>
+							<option value="4">Umm Al-Qura</option>
+							<option value="2">North America</option>
+					    </select>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="large-4 large-offset-4">
+                        <input type="submit" class="trigger-preferences button circular" value="Save &amp; Update">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+
+    </script>
+</body>
+</html>
+
