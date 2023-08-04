@@ -1,9 +1,7 @@
-
 let data;
-const thisday = new Date().getDate()-1; 
+const thisday = new Date().getDate() - 1;
 var deadline = new Date(Date.parse(new Date()) + 6 * 60 * 60 * 1000);
-function main(method=5,school=0)
-{
+function main(method = 5, school = 0) {
   navigator.geolocation.getCurrentPosition(function (position) {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
@@ -22,20 +20,17 @@ function main(method=5,school=0)
         thisDay();
         initializeClock("clockdiv", deadline);
         todayallprays();
-        
-
       });
     //console.log(latitude);
     //console.log(longitude);
   });
 }
 main();
-function monthPrays()
-{
+function monthPrays() {
   let table = document.querySelector(".table");
- 
+
   //console.log(data);
-  
+
   table.innerHTML = `<tr class="row-title">
   
                         <td>${data[thisday].date.gregorian.month.en}</td>
@@ -66,30 +61,26 @@ function monthPrays()
   }
 }
 
-function thisDay()
-{
+function thisDay() {
   const now = new Date();
   const currentHours = now.getHours();
   const currentMinutes = now.getMinutes();
 
-  
-  
-  
   let nextPray = data[parseInt(thisday)].timings;
-  console.log(nextPray)
+  console.log(nextPray);
   for (let propertyName in nextPray) {
-    let x = nextPray[propertyName].split(' ')[0]
+    let x = nextPray[propertyName].split(" ")[0];
     const [hours2, minutes2] = x.split(":");
     const totalMinutes1 = currentHours * 60 + currentMinutes;
     const totalMinutes2 = parseInt(hours2) * 60 + parseInt(minutes2);
     const difference = totalMinutes2 - totalMinutes1;
     if (difference > 0) {
       console.log(nextPray[propertyName]);
-      console.log(difference)
+      console.log(difference);
       deadline = new Date(Date.parse(new Date()) + difference * 60 * 1000);
       document.querySelector(".upcomingPrayerName").innerHTML = propertyName;
       console.log(deadline);
-      break; 
+      break;
     }
     //console.log(`${propertyName}: ${nextPray[propertyName].split(' ')[0]}`);
   }
@@ -131,9 +122,7 @@ function initializeClock(id, endtime) {
   var timeinterval = setInterval(updateClock, 1000);
 }
 
-function todayallprays()
-{
-
+function todayallprays() {
   //console.log(thisday)
   document.querySelector(
     ".todayPrayersContainer"
@@ -173,24 +162,22 @@ function todayallprays()
                       data[thisday].timings.Isha.split(" ")[0]
                     } PM</span></div>
                 </div>`;
-  
+
   document.querySelector(".dateToday").innerHTML =
     data[thisday].date.hijri.day +
     " " +
     data[thisday].date.hijri.month.en +
     ", " +
     data[thisday].date.hijri.year;
-  
+
   document.querySelector("#gregorianMonth").innerHTML =
-    data[thisday].date.gregorian.month.en + " " + 
+    data[thisday].date.gregorian.month.en +
+    " " +
     data[thisday].date.gregorian.year;
-  
+
   document.querySelector(".zero-margin").innerHTML =
     data[thisday].date.hijri.month.en + " " + data[thisday].date.hijri.year;
 }
-
-
-
 
 $(document).ready(function () {
   $(".trigger-preferences").click(function () {
